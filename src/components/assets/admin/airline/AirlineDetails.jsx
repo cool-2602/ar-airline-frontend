@@ -7,7 +7,7 @@ import A_navigation from "../A_navigation";
 const AirlineDetails  = () => {
   const [airlines, setAirlines] = useState([]);
 
-  const {air_id } = useParams();
+  const { a_id } = useParams();
 
  useEffect(() => {
     loadAirlines();
@@ -19,6 +19,10 @@ const AirlineDetails  = () => {
   setAirlines(result.data);
  }
 
+ const deleteAirlines = async (a_id) => {
+  await axios.delete(`http://localhost:8080/airlines/delete/${a_id}`);
+  loadAirlines();
+};
 
 
   return (
@@ -33,7 +37,7 @@ const AirlineDetails  = () => {
               <th scope="col">Airline Name</th>
               <th scope="col">Airline Contact</th>
               <th scope="col">Region</th>
-              {/* <th scope="col">Action</th> */}
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -45,6 +49,14 @@ const AirlineDetails  = () => {
                 <td>{airlines.a_name}</td>
                 <td>{airlines.contact}</td>
                 <td>{airlines.region}</td>
+                <td>
+                  <button
+                    className="btn btn-danger mx-2"
+                    onClick={() => deleteAirlines(airlines.a_id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

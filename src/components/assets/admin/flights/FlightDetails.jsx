@@ -21,6 +21,11 @@ const  FlightDetails = () =>
     setFlights(result.data);
    }
 
+   const deleteFlight = async (f_id) => {
+    await axios.delete(`http://localhost:8080/flights/delete/${f_id}`);
+    loadFlights();
+  };
+
     return (
         <div className="Container">
         <A_navigation/>
@@ -37,6 +42,7 @@ const  FlightDetails = () =>
                   <th scope="col">Destination</th>
                   <th scope="col">Country</th>
                   <th scope="col">Seats</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -52,6 +58,14 @@ const  FlightDetails = () =>
                     <td>{flights.destination}</td>
                     <td>{flights.country}</td>
                     <td>{flights.seats}</td>
+                    <td>
+                  <button
+                    className="btn btn-danger mx-2"
+                    onClick={() => deleteFlight(flights.f_id)}
+                  >
+                    Delete
+                  </button>
+                </td>
                   </tr>
                 ))}
               </tbody>

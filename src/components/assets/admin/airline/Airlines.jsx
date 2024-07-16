@@ -25,7 +25,7 @@ const  Airlines = () =>
     const onSubmit = async (e) => {
       e.preventDefault();
       await axios.post("http://localhost:8080/airlines/add", airline);
-      navigate("/Dashboard");
+      navigate("/Dashboard/AirlineDetails");
     };
 
 
@@ -45,7 +45,7 @@ const  Airlines = () =>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Date"
+                placeholder="Name"
                 name="a_name"
                 onChange={(e) => onInputChange(e)}
               />
@@ -58,7 +58,7 @@ const  Airlines = () =>
               <input
                 type={"text"}
                 className="form-control"
-                placeholder="Date"
+                placeholder="contact"
                 name="contact"
                 onChange={(e) => onInputChange(e)}
               />
@@ -78,7 +78,7 @@ const  Airlines = () =>
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
-            <Link className="btn btn-outline-danger mx-2" to="/Dashboard">
+            <Link className="btn btn-outline-danger mx-2" to="/Dashboard/AirlineDetails">
               Cancel
             </Link>
           </form>

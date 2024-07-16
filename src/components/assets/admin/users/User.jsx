@@ -44,7 +44,7 @@ const  User = () =>
             <form onSubmit={(e) => onSubmit(e)}>
               <div className="mb-3">
                 <label htmlFor="Name" className="form-label">
-                  Last Name
+                  First Name
                 </label>
                 <input
                   type={"text"}

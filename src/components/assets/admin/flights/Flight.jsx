@@ -30,7 +30,7 @@ const  Flight = () =>
         const onSubmit = async (e) => {
           e.preventDefault();
           await axios.post("http://localhost:8080/flights/add", flights);
-          navigate("/Dashboard");
+          navigate("/Dashboard/FlightDetails");
         };
 
 

@@ -43,12 +43,12 @@ const  Registration = () =>
             <form onSubmit={(e) => onSubmit(e)}>
               <div className="mb-3">
                 <label htmlFor="Name" className="form-label">
-                  Last Name
+                  First Name
                 </label>
                 <input
                   type={"text"}
                   className="form-control"
-                  placeholder="Enter your name"
+                  placeholder="Enter your first name"
                   name="f_name"
                   onChange={(e) => onInputChange(e)}
                 />
@@ -60,7 +60,7 @@ const  Registration = () =>
                 <input
                   type={"text"}
                   className="form-control"
-                  placeholder="Enter your username"
+                  placeholder="Enter your last name"
                   name="l_name"
                   onChange={(e) => onInputChange(e)}
                 />
@@ -84,7 +84,7 @@ const  Registration = () =>
                 <input
                   type={"text"}
                   className="form-control"
-                  placeholder="Enter your name"
+                  placeholder="Enter your address"
                   name="address"
                   onChange={(e) => onInputChange(e)}
                 />
@@ -96,7 +96,7 @@ const  Registration = () =>
                 <input
                   type={"text"}
                   className="form-control"
-                  placeholder="Enter your name"
+                  placeholder="Enter your email"
                   name="emailID"
                   onChange={(e) => onInputChange(e)}
                 />
@@ -106,9 +106,9 @@ const  Registration = () =>
                   Password
                 </label>
                 <input
-                  type={"text"}
+                  type={"password"}
                   className="form-control"
-                  placeholder="Enter your name"
+                  placeholder="Enter your password"
                   name="pswd"
                   onChange={(e) => onInputChange(e)}
                 />

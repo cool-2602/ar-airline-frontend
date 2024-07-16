@@ -50,7 +50,7 @@ const RegistrationDetails  = () =>
                     <td>{registration.l_name}</td>
                     <td>{registration.mob_no}</td>
                     <td>{registration.address}</td>
-                    <td>{registration.emailId}</td>
+                    <td>{registration.emailID}</td>
                     <td>{registration.pswd}</td>
                  
                   </tr>

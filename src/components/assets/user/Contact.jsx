@@ -26,7 +26,7 @@ const  Contact = () =>
                 </ul>
                 </div>
                 <div className="about-2">
-                    <h3>India by AR</h3>
+                    <h4>India by AR</h4>
                     <ul>
                         <li>- Third floor, Emaar Capital Tower 2, Mehrauli - Gurgaon Road, Gurugram, Haryana – 122002</li>
                         <li>- Tel : +91 (0)124 435 2500</li>
@@ -36,7 +36,7 @@ const  Contact = () =>
                 </div>
 
                 <div className="about-3">
-                    <h3>Customer Support</h3>
+                    <h4>Customer Support</h4>
                     <li>- India : 0124-6173838, 0124-4973838</li>
                     &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
                 </div>
