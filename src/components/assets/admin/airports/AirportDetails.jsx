@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../a_style.css";
 import A_navigation from "../A_navigation";
 
 const AirportDetails = () => {
+  let navigate = useNavigate();
+
   const [airports, setAirport] = useState([]);
 
   useEffect(() => {
@@ -16,10 +18,16 @@ const AirportDetails = () => {
     setAirport(result.data);
   };
 
+   const updateAirport = async (airport_code) => {
+    navigate(`/DashBoard/editAirport/${airport_code}`); // Navigate to edit page with code
+  };
+
   const deleteAirport = async (airport_code) => {
     await axios.delete(`http://localhost:8080/airports/delete/${airport_code}`);
     loadAirports();
   };
+
+
 
   return (
     <div className="Container">
@@ -44,7 +52,16 @@ const AirportDetails = () => {
                 <td>{airport.airport_name}</td>
                 <td>{airport.location}</td>
                 <td>
+                <button
+                  
+                  className="btn btn-success mx-2"
+                  // className="btn btn-secondary mx-2"
+                  onClick={() => updateAirport(airport.airport_code)}
+                >
+                  Update
+                </button>
                   <button
+                  
                     className="btn btn-danger mx-2"
                     onClick={() => deleteAirport(airport.airport_code)}
                   >

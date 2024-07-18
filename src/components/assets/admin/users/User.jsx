@@ -31,7 +31,7 @@ const  User = () =>
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post("http://localhost:8080/user/add", user);
-    navigate("/");
+    navigate("/Dashboard/UserDetails");
   };
     return (
       <div className="Contain">
@@ -107,7 +107,7 @@ const  User = () =>
                   Password
                 </label>
                 <input
-                  type={"text"}
+                  type={"password"}
                   className="form-control"
                   placeholder="Enter your name"
                   name="pswd"
@@ -117,7 +117,7 @@ const  User = () =>
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
-            <Link className="btn btn-outline-danger mx-2" to="/">
+            <Link className="btn btn-outline-danger mx-2" to="/Dashboard/UserDetails">
               Cancel
             </Link>
           </form>

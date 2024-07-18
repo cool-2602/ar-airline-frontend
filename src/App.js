@@ -1,6 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Home from "./components/assets/user/Home";
 import About from "./components/assets/user/About";
 import Contact from "./components/assets/user/Contact";
@@ -20,8 +20,14 @@ import Flight from "./components/assets/admin/flights/Flight"
 import FlightDetails from "./components/assets/admin/flights/FlightDetails";
 import ReservationDetails from "./components/assets/admin/ReservationDetails";
 import AddAirport from "./components/assets/admin/airports/addAirport";
+import EditAirport from "./components/assets/admin/airports/editAirport";
+import EditAirlines from "./components/assets/admin/airline/editAirlines";
+import EditFlights from "./components/assets/admin/flights/editFlights";
 
-import {BrowserRouter as Router, Routes, Route,} from "react-router-dom";
+import RouteGuard from "./components/assets/user/RouteGuard ";
+import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
+import { Bounce, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -29,31 +35,47 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce} />
+
         <Routes>
-          <Route path = "/" element={< Home/>}></Route>      
-          <Route path = "/About" element={< About/>}></Route>
-          <Route path = "/Search" element={< Search/>}></Route>
-          <Route path = "/Contact" element={< Contact/>}></Route>
-          <Route path = "/Checkout" element={< Checkout/>}></Route>
-          <Route path = "/Login" element={< Login/>}></Route>
-          <Route path = "/Registration" element={< Registration/>}></Route>
-      
+          <Route path="/" element={< Home />}></Route>
+          <Route path="/About" element={< About />}></Route>
+          <Route path="/Search" element={< Search />}></Route>
+          <Route path="/Contact" element={< Contact />}></Route>
+          <Route path="/Checkout" element={< Checkout />}></Route>
+          <Route path="/Login" element={< Login />}></Route>
+          <Route path="/Registration" element={< Registration />}></Route>
+
 
 
           {/* /************************Admin************************ */}
-          <Route path = "/Dashboard" element={< Dashboard/>}></Route>
-          <Route path = "Dashboard/User" element={< User/>}></Route>
-          <Route path = "Dashboard/UserDetails" element={< UserDetails/>}></Route>
-          <Route path = "Dashboard/Airlines" element={< Airlines/>}></Route>
-          <Route path = "Dashboard/AirlineDetails" element={< AirlineDetails/>}></Route>
-          <Route path = "Dashboard/RegistrationDetails" element={< RegistrationDetails/>}></Route>
-          <Route path = "Dashboard/AddAirport" element={< AddAirport/>}></Route>
-          <Route path = "Dashboard/editAirport" element={< editAirport/>}></Route>
-          <Route path = "Dashboard/AirportDetails" element={< AirportDetails/>}></Route>
-          <Route path = "Dashboard/Flight" element={< Flight/>}></Route>
-          <Route path = "Dashboard/FlightDetails" element={< FlightDetails/>}></Route>
-         
-          
+          {/* <Route path = "/Dashboard" element={< Dashboard/>}></Route> */}
+          <Route path="/Dashboard" element={<RouteGuard component={Dashboard} roleRequired="ROLE_ADMIN" />}></Route>
+          <Route path="Dashboard/User" element={< User />}></Route>
+          <Route path="Dashboard/UserDetails" element={< UserDetails />}></Route>
+          <Route path="Dashboard/Airlines" element={< Airlines />}></Route>
+          <Route path="Dashboard/AirlineDetails" element={< AirlineDetails />}></Route>
+          <Route path="Dashboard/RegistrationDetails" element={< RegistrationDetails />}></Route>
+          <Route path="Dashboard/AddAirport" element={< AddAirport />}></Route>
+          <Route path="Dashboard/EditAirport/:airport_code" element={< EditAirport />}></Route>
+          <Route path="Dashboard/EditAirlines/:a_id" element={< EditAirlines />}></Route>
+          <Route path="Dashboard/EditFlights/:f_id" element={< EditFlights />}></Route>
+          <Route path="Dashboard/AirportDetails" element={< AirportDetails />}></Route>
+          <Route path="Dashboard/Flight" element={< Flight />}></Route>
+          <Route path="Dashboard/FlightDetails" element={< FlightDetails />}></Route>
+
+
           <Route exact path="/Checkout/:f_id" element={<Checkout />} />
 
         </Routes>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate} from "react-router-dom";
 import "../a_style.css";
 import A_navigation from "../A_navigation";
 
 
 const  FlightDetails = () =>
     {
+      let navigate = useNavigate();
     const [flights, setFlights] = useState([]);
   
     const {f_id } = useParams();
@@ -20,6 +21,10 @@ const  FlightDetails = () =>
     const result = await axios.get("http://localhost:8080/flights");
     setFlights(result.data);
    }
+
+   const updateFlight = async (f_id) => {
+    navigate(`/DashBoard/editFlights/${f_id}`); // Navigate to edit page with code
+  };
 
    const deleteFlight = async (f_id) => {
     await axios.delete(`http://localhost:8080/flights/delete/${f_id}`);
@@ -59,6 +64,14 @@ const  FlightDetails = () =>
                     <td>{flights.country}</td>
                     <td>{flights.seats}</td>
                     <td>
+                    <button
+                  
+                  className="btn btn-success mx-2"
+                  // className="btn btn-secondary mx-2"
+                  onClick={() => updateFlight(flights.f_id)}
+                >
+                  Update
+                </button>
                   <button
                     className="btn btn-danger mx-2"
                     onClick={() => deleteFlight(flights.f_id)}

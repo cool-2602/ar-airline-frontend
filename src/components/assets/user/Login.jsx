@@ -1,69 +1,75 @@
-
-import axios from "axios";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
-
 import "./style.css";
 
-const  Login = () =>
-    {
-    let navigate = useNavigate();
-    const [registration, setRegistration] = useState({
-    });
-    
-      const { f_name,l_name,mob_no,address,emailID ,pswd} = registration;
-    
-      const onInputChange = (e) => {
-        setRegistration({ ...registration, [e.target.name]: e.target.value });
-      };
-    
-      const onSubmit = async (e) => {
-        e.preventDefault();
-        await axios.post("http://localhost:8080/login", registration);
-        navigate("/");
-      };
-    return(
-        <div className="Container">
-        <Navigation/>
-        <div className="row">
-          <div className="col-md-4 offset-md-3 border rounded p-4 mt-2 shadow">
-            <h2 className="text-center m-4">Login</h2>
-  
-            <form onSubmit={(e) => onSubmit(e)}>
-              <div className="mb-3">
-                <label htmlFor="Name" className="form-label">
-                  User Name
-                </label>
-                <input
-                  type={"text"}
-                  className="form-control"
-                  placeholder="username"
-                  name="username"
-                  onChange={(e) => onInputChange(e)}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="pswd" className="form-label">
-                  Password
-                </label>
-                <input
-                  type={"text"}
-                  className="form-control"
-                  placeholder="password"
-                  name="pswd"
-                  onChange={(e) => onInputChange(e)}
-                />
-                 </div>
-                 <button type="submit" className="btn btn-outline-primary">
-              Submit
-            </button>
-                </form>
-              </div>
-              </div>
-            <Footer/>
+const Login = () => {
+  let navigate = useNavigate();
+  const [credentials, setCredentials] = useState({
+    emailID: "",
+    pswd: "",
+  });
+
+  const { emailID, pswd } = credentials;
+
+  const onInputChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8080/login", credentials, { withCredentials: true });
+      const role = response.data;
+
+      if (role === "ROLE_ADMIN") {
+        navigate("/dashboard");
+      } else {
+        navigate("/user_dashboard");
+      }
+    } catch (error) {
+      alert("Invalid credentials");
+    }
+  };
+
+  return (
+    <div className="Container">
+      <Navigation />
+      <div className="row">
+        <div className="col-md-4 offset-md-3 border rounded p-4 mt-2 shadow">
+          <h2 className="text-center m-4">Login</h2>
+          <form onSubmit={onSubmit}>
+            <div className="mb-3">
+              <label htmlFor="emailID" className="form-label">Email</label>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Enter your email"
+                name="emailID"
+                value={emailID}
+                onChange={onInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="pswd" className="form-label">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Enter your password"
+                name="pswd"
+                value={pswd}
+                onChange={onInputChange}
+              />
+            </div>
+            <button type="submit" className="btn btn-outline-primary">Submit</button>
+          </form>
         </div>
-    );
-}  
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
 export default Login;

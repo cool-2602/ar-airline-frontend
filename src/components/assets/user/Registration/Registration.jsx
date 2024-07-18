@@ -4,11 +4,15 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navigation from "../Navigation";
 import Footer from "../Footer";
+import { toast } from 'react-toastify';
 
 import "../style.css";
 
 const  Registration = () =>
 {
+
+  
+  // const notify = () => toast("User Register SuccessFully");
 
     let navigate = useNavigate();
 
@@ -31,7 +35,16 @@ const  Registration = () =>
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post("http://localhost:8080/registration/add", registration);
-    navigate("/");
+    toast.success("User Register Successfully ");
+    setRegistration({    
+      f_name: "",
+      l_name: "",
+      mob_no: "",
+      address: "",
+      emailID:"",
+      password:""
+  })
+    navigate("/Login");
   };
     return (
         <div className="Container">
@@ -116,7 +129,7 @@ const  Registration = () =>
             <button type="submit" className="btn btn-outline-primary">
               Submit
             </button>
-            <Link className="btn btn-outline-danger mx-2" to="/">
+            <Link className="btn btn-outline-danger mx-2" to="/Login">
               Cancel
             </Link>
           </form>
